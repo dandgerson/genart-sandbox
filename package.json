@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "canvas-sketch": "^0.7.3"
+    "canvas-sketch": "^0.7.3",
+    "canvas-sketch-util": "^1.10.0"
   }
 }
