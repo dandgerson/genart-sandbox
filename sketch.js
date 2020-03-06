@@ -1,4 +1,5 @@
 const canvasSketch = require('canvas-sketch');
+const random = require('canvas-sketch-util/random')
 const { lerp } = require('canvas-sketch-util/math')
 
 const settings = {
@@ -20,8 +21,9 @@ const sketch = () => {
     })
     return points
   }
-  
-  const grid = genGrid(7)
+
+  random.setSeed('Dmitry G. Anderson')
+  const grid = genGrid(65).filter(() => random.value() > 0.5)
   const margin = 200
 
   return ({ context: c, width: w, height: h }) => {
@@ -33,9 +35,9 @@ const sketch = () => {
       const y = lerp(margin, h - margin, yPos)
 
       c.beginPath()
-      c.arc(x, y, 100, 0, Math.PI * 2, false)
+      c.arc(x, y, 10, 0, Math.PI * 2, false)
       c.strokeStyle = 'black'
-      c.lineWidth = 10
+      c.lineWidth = 5
       c.stroke()
     })
     
