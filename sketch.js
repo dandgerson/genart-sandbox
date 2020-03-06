@@ -2,32 +2,41 @@ const canvasSketch = require('canvas-sketch');
 
 const settings = {
   dimensions: [2048, 2048],
-  // units: 'cm',
-  // orientation: 'landscape',
-  // pixelsPerInch: 300,
 };
 
 const sketch = () => {
+  const genGrid = (count) => {
+    const points = []
+
+    const iterable = Array(count).fill(null)
+    iterable.forEach((_, x) => {
+      iterable.forEach((_, y) => {
+        const xPos = count <= 1 ? 0.5 : x / (count - 1)
+        const yPos = count <= 1 ? 0.5 : y / (count - 1)
+
+        points.push([xPos, yPos])
+      })
+    })
+    return points
+  }
+
+  const grid = genGrid(7)
+
   return ({ context: c, width: w, height: h }) => {
-    // console.log({w, h})
+    c.fillStyle = 'grey'
+    c.fillRect(0, 0, w, h)
 
-    c.fillStyle = 'grey';
-    c.fillRect(0, 0, w, h);
+    grid.forEach(([xPos, yPos]) => {
+      const x = xPos * w
+      const y = yPos * h
 
-    c.beginPath()
-    c.arc(
-      w * 0.5, // x
-      h * 0.5, // y
-      w * 0.2, // radius
-      0, // start angle
-      Math.PI * 2, // end angle
-      false, // anticlockwise
-    )
-    c.fillStyle = 'salmon';
-    c.fill()
-    c.lineWidth = w * 0.01
-    c.strokeStyle = 'black'
-    c.stroke()
+      c.beginPath()
+      c.arc(x, y, 100, 0, Math.PI * 2, false)
+      c.strokeStyle = 'black'
+      c.lineWidth = 10
+      c.stroke()
+    })
+    
   };
 };
 
