@@ -9,14 +9,19 @@ const colorCount = random.rangeFloor(2, 6)
 const palette = random.shuffle(random.pick(palettes))
   .slice(0, colorCount)
 
-random.setSeed([
+const seeds = [
+  '=',
   'Dmitry G. Anderson',
   'Irina V. Anderson',
   'dandgerson',
   'Daria A. Platonova',
   'Maxim P. Pavlov',
   'Aleksey S. Bobin',
-][2])
+]
+
+const seed = seeds[0]
+
+random.setSeed(seed)
 
 const sketch = () => {
   const grid = genGrid({
@@ -33,14 +38,19 @@ const sketch = () => {
       position: [xPos, yPos],
       radius,
       color,
+      rotation,
     }) => {
       const x = lerp(margin, w - margin, xPos)
       const y = lerp(margin, h - margin, yPos)
 
-      c.beginPath()
-      c.arc(x, y, radius * w, 0, Math.PI * 2, false)
+      c.save()
       c.fillStyle = color
-      c.fill()
+      c.font = `${radius * w}px 'Helvetica'`
+      c.rotate(rotation)
+      c.translate(x, y)
+      c.fillText(`${seed}`, 0, 0)
+
+      c.restore()
     })
 
   };

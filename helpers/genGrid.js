@@ -12,8 +12,9 @@ module.exports = ({count, palette}) => {
 
       points.push({
         color: random.pick(palette),
-        radius: Math.abs(noisedRadius * 0.1),
+        radius: Math.abs(noisedRadius * 0.2),
         position: [xPos, yPos],
+        rotation: noisedRadius,
       })
     })
   })
