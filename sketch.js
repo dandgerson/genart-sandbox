@@ -19,13 +19,13 @@ const seeds = [
   'Aleksey S. Bobin',
 ]
 
-const seed = seeds[0]
+const seed = seeds[3]
 
 random.setSeed(seed)
 
 const sketch = () => {
   const grid = genGrid({
-    count: 65,
+    count: 30,
     palette,
   }).filter(() => random.value() > 0.5)
   const margin = 200
@@ -57,5 +57,6 @@ const sketch = () => {
 };
 
 canvasSketch(sketch, {
+  suffix: seed,
   dimensions: [2048, 2048],
 });
